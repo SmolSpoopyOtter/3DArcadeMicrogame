@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(CharacterController))]
 public class FirstPersonController : MonoBehaviour
@@ -8,12 +9,12 @@ public class FirstPersonController : MonoBehaviour
     public float mouseSensitivity = 120f;
     public float minPitch = -75f;
     public float maxPitch = 75f;
-
+    [SerializeField] private UnityEvent targetHit;
     private CharacterController controller;
     private float yVelocity;
     private float pitch; // up/down rotation
 
-    private float range = 10f; 
+    private float range = 20f; 
 
     void Start()
     {
@@ -57,6 +58,7 @@ public class FirstPersonController : MonoBehaviour
             if (hitInformation.collider.CompareTag("Target"))
             {
                 Destroy(hitInformation.collider.gameObject);
+                targetHit.Invoke();
             }
         }
     }
