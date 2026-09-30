@@ -6,10 +6,11 @@ public class TargetMovement : MonoBehaviour
 {
     private Vector3 targetPosition;
     [SerializeField] private FirstPersonController firstPersonController;
-    private float[] SpawningRules = {0,0,0};
+    private float[] SpawningRules = { 0, 0, 0 };
     private Vector3 startPosition;
+    public int lives = 3;
     private bool returnStart = false;
-    public UnityEvent Respawn;
+    public UnityEvent<bool> Respawn;
     private float speed = 4f;
     void Start()
     {
@@ -35,7 +36,7 @@ public class TargetMovement : MonoBehaviour
 
         if (Vector3.Distance(transform.position, startPosition) < 0.01 && returnStart == true)
         {
-            Respawn.Invoke();
+            Respawn.Invoke(true);
             Destroy(gameObject);
         }
 

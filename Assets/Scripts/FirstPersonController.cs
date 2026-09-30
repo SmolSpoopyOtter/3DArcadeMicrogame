@@ -10,10 +10,13 @@ public class FirstPersonController : MonoBehaviour
     public float minPitch = -75f;
     public float maxPitch = 75f;
     [Header("Game Values")]
-    public float score = 24;
-    [SerializeField] private UnityEvent targetHit;
+    public float score = 0;
+    public float misses = 0;
+    public bool dataSwitch;
+    [SerializeField] private UnityEvent<float,bool> populateData;
+    [SerializeField] private UnityEvent<bool> targetHit;
     private float pitch; // up/down rotation
-    private float range = 20f; 
+    private float range = 100f; 
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -51,12 +54,17 @@ public class FirstPersonController : MonoBehaviour
 
             if (hitInformation.collider.CompareTag("Target"))
             {
-                targetHit.Invoke();
+                dataSwitch = true;
                 score++;
+                populateData.Invoke(score, dataSwitch);
+                targetHit.Invoke(false);
+                Destroy(hitInformation.collider.gameObject);
             }
             else 
             {
-                Debug.Log("Haw Haw you missed loser");    
+                misses++;
+                dataSwitch = false;
+                populateData.Invoke(misses, dataSwitch);
             }
         }
     }
