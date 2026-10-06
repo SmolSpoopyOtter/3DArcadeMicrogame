@@ -1,14 +1,17 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.Events;
 
 public class BillboardUIController : MonoBehaviour
 {
+    [Header("Text Objects")] 
     [SerializeField] private TextMeshPro scoreText;
     [SerializeField] private TextMeshPro missesText;
+    [Header("Game Objects")]
     [SerializeField] private GameObject life1;
     [SerializeField] private GameObject life2;
     [SerializeField] private GameObject life3;
+    public UnityEvent Kill;
 
     public void Start()
     {
@@ -42,6 +45,8 @@ public class BillboardUIController : MonoBehaviour
         else if (lives == 0)
         {
             life3.SetActive(true);
+            Kill.Invoke();
         }
     }
+
 }

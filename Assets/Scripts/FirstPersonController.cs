@@ -1,3 +1,5 @@
+using System.ComponentModel;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -15,12 +17,17 @@ public class FirstPersonController : MonoBehaviour
     public bool dataSwitch;
     [SerializeField] private UnityEvent<float,bool> populateData;
     [SerializeField] private UnityEvent<bool> targetHit;
-    private float pitch; // up/down rotation
-    private float range = 100f; 
+    private float pitch;
+    private float range = 100f;
+    [Header("UI Elements")]
+    [SerializeField] private GameObject GameOverScreen;
+    [SerializeField] private TextMeshProUGUI HitNMissText;
+    [SerializeField] private TextMeshProUGUI AccuracyText;
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        GameOverScreen.SetActive(false);
     }
 
     void Update()
@@ -30,6 +37,7 @@ public class FirstPersonController : MonoBehaviour
         {
             Shoot();
         }
+
     }
 
     void Look()
@@ -67,5 +75,12 @@ public class FirstPersonController : MonoBehaviour
                 populateData.Invoke(misses, dataSwitch);
             }
         }
+    }
+
+    public void PopulateGameOverUI()
+    {
+        GameOverScreen.SetActive(true);
+        HitNMissText.text = $"Hits: {score} Misses: {misses}";
+        AccuracyText.text = $"Your accuracy was: {(score / (score + misses)) * 100}%";
     }
 }

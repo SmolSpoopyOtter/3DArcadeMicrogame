@@ -8,7 +8,6 @@ public class TargetMovement : MonoBehaviour
     [SerializeField] private FirstPersonController firstPersonController;
     private float[] SpawningRules = { 0, 0, 0 };
     private Vector3 startPosition;
-    public int lives = 3;
     private bool returnStart = false;
     public UnityEvent<bool> Respawn;
     private float speed = 4f;
