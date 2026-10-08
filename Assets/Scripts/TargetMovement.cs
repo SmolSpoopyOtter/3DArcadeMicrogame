@@ -16,6 +16,7 @@ public class TargetMovement : MonoBehaviour
         DifficultyScale();
         targetPosition = new Vector3(Random.Range(4f, 5f), Random.Range(0.8f, SpawningRules[0]), Random.Range(SpawningRules[1], SpawningRules[2]));
         startPosition = new Vector3(targetPosition.x, 0, targetPosition.z);
+        transform.rotation = Quaternion.Euler(new Vector3(0, 90, 0));
         transform.position = new Vector3(targetPosition.x, 0, targetPosition.z);
     }
     void Update()
@@ -23,7 +24,6 @@ public class TargetMovement : MonoBehaviour
         if (Vector3.Distance(transform.position, targetPosition) > 0.01 && returnStart == false)
         {
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
-            transform.rotation = new Quaternion(0,90,0,0.625f);
         }
         else if (Vector3.Distance(transform.position, targetPosition) < 0.01 && returnStart == false)
         {
@@ -32,6 +32,7 @@ public class TargetMovement : MonoBehaviour
         if (returnStart)
         {
             transform.position = Vector3.MoveTowards(transform.position, startPosition, speed * Time.deltaTime);
+            transform.rotation = new Quaternion(0,1,0,0.625f);
         }
 
         if (Vector3.Distance(transform.position, startPosition) < 0.01 && returnStart == true)
