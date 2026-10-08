@@ -79,8 +79,10 @@ public class FirstPersonController : MonoBehaviour
 
     public void PopulateGameOverUI()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         GameOverScreen.SetActive(true);
         HitNMissText.text = $"Hits: {score} Misses: {misses}";
-        AccuracyText.text = $"Your accuracy was: {(score / (score + misses)) * 100}%";
+        AccuracyText.text = $"Your accuracy was: {Mathf.Ceil((score / (score + misses)) * 100)}%";
     }
 }

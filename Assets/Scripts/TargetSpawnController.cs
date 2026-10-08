@@ -28,7 +28,7 @@ public class TargetSpawnController : MonoBehaviour
     {
         if (lives > 0)
         {
-            Quaternion targetRotation = new Quaternion(180, 180, 0, 1);
+            Quaternion targetRotation = new Quaternion(0, 180, 0, 1);
             GameObject instantiatedObject = Instantiate(Target, new Vector3(0, 0, 0), targetRotation);
             instantiatedObject.SetActive(true);
         }

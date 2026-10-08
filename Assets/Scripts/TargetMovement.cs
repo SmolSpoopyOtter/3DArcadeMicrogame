@@ -23,6 +23,7 @@ public class TargetMovement : MonoBehaviour
         if (Vector3.Distance(transform.position, targetPosition) > 0.01 && returnStart == false)
         {
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+            transform.rotation = new Quaternion(0,90,0,0.625f);
         }
         else if (Vector3.Distance(transform.position, targetPosition) < 0.01 && returnStart == false)
         {
