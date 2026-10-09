@@ -23,6 +23,9 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private GameObject GameOverScreen;
     [SerializeField] private TextMeshProUGUI HitNMissText;
     [SerializeField] private TextMeshProUGUI AccuracyText;
+    [Header("GameObjects")]
+    [SerializeField] private ParticleSystem gunSmoke;
+    [SerializeField] private AudioSource gunShotSFX;
     void Start()
     {
         print(PlayerPrefs.GetFloat("Sensitivity") * 1000);
@@ -58,6 +61,8 @@ public class FirstPersonController : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hitInformation;
+        gunSmoke.Play();
+        gunShotSFX.Play();
 
         if (Physics.Raycast(ray, out hitInformation, range))
         {
@@ -68,6 +73,7 @@ public class FirstPersonController : MonoBehaviour
                 score++;
                 populateData.Invoke(score, dataSwitch);
                 targetHit.Invoke(false);
+
                 Destroy(hitInformation.collider.gameObject);
             }
             else 
@@ -78,7 +84,7 @@ public class FirstPersonController : MonoBehaviour
             }
         }
     }
-
+    
     public void PopulateGameOverUI()
     {
         Cursor.lockState = CursorLockMode.None;
