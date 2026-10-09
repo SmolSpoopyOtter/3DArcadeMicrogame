@@ -8,7 +8,7 @@ public class FirstPersonController : MonoBehaviour
 {
     [Header("Mouse Look")]
     public Transform cameraPivot;
-    public float mouseSensitivity = 120f;
+    public float mouseSensitivity;
     public float minPitch = -75f;
     public float maxPitch = 75f;
     [Header("Game Values")]
@@ -25,6 +25,8 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI AccuracyText;
     void Start()
     {
+        print(PlayerPrefs.GetFloat("Sensitivity") * 1000);
+        mouseSensitivity = PlayerPrefs.GetFloat("Sensitivity")*1000;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         GameOverScreen.SetActive(false);

@@ -45,7 +45,7 @@ public class TargetMovement : MonoBehaviour
 
     void DifficultyScale()
     {
-        SpawningRules[0] = Mathf.Clamp(2f * (1 + firstPersonController.score / 125), 0.8f, 3.0f);
+        SpawningRules[0] = Mathf.Clamp(2f * (1 + firstPersonController.score / 125), 0.8f, 2.8f);
         SpawningRules[1] = Mathf.Clamp(-(1.5f * (1 + firstPersonController.score / 125)), -3.0f, -1.5f);
         SpawningRules[2] = Mathf.Clamp(1.5f * (1 + firstPersonController.score / 125), 1.5f, 3.0f);
     }
