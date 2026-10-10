@@ -48,7 +48,6 @@ public class MainUIHandler : MonoBehaviour
 
     public void Exit()
     {
-        Debug.Log("quit");
         Application.Quit();
     }
 }
