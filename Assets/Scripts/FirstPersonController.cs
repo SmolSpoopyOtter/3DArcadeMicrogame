@@ -26,6 +26,12 @@ public class FirstPersonController : MonoBehaviour
     [Header("GameObjects")]
     [SerializeField] private ParticleSystem gunSmoke;
     [SerializeField] private AudioSource gunShotSFX;
+    private bool gunEnabled = true;
+
+    public void pause(bool paused) {
+        gunEnabled = !paused;
+    }
+
     void Start()
     {
         print(PlayerPrefs.GetFloat("Sensitivity") * 1000);
@@ -59,7 +65,8 @@ public class FirstPersonController : MonoBehaviour
 
     void Shoot()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (!gunEnabled) return;
+        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit hitInformation;
         gunSmoke.Play();
         gunShotSFX.Play();
