@@ -45,4 +45,9 @@ public class MainUIHandler : MonoBehaviour
             toggle = 3;
         }
     }
+
+    public void Exit()
+    {
+        Application.Quit();
+    }
 }
