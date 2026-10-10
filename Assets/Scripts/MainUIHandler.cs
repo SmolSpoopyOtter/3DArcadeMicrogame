@@ -45,4 +45,10 @@ public class MainUIHandler : MonoBehaviour
             toggle = 3;
         }
     }
+
+    public void Exit()
+    {
+        Debug.Log("quit");
+        Application.Quit();
+    }
 }
